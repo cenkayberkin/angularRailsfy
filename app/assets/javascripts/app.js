@@ -11,12 +11,24 @@
     $httpProvider.defaults.headers.common.Accept = 'application/json';
   }]);
 
-  app.controller('StoreController', ['$http',function($http){
+
+  app.controller('StoreController', ['$scope','$http',function($scope, $http){
     var store = this;
     store.products = [];
-    $http.get('products/index').success(function(data){
-      store.products = data.products;
-    });
+
+    $scope.index = function( ){
+      $http.get('products/index')
+          .success(function(data){
+            console.log(data);
+            store.products = data.products;
+          })
+          .error(function(data, status){
+            $scope.errors.push(data);
+            console.log(data);
+            console.log(status);
+          });
+    };
+
   }]);
 
   app.controller('ReviewController', function() {
