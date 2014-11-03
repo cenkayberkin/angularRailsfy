@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   get 'angular/show' => 'angular#show'
   get 'products/index' => 'products#index'
+  post 'products/create' => 'products#create'
+  patch 'products/:id' => 'products#update'
+  delete 'products/:id' => 'products#destroy'
   root 'angular#show'
 
   # You can have the root of your site routed with "root"
