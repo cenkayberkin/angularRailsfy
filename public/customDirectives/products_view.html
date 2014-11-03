@@ -1,0 +1,61 @@
+<div ng-controller="StoreController as store" ng-init="index()">
+
+  <button <button data-ng-click="product.createForm = true">Create New Product</button>
+  <form name="newProductForm" data-ng-show="product.createForm" novalidate>
+    <label> Name</label>:
+    <input type="text" required data-ng-model="newProduct.name"> </br>
+    <label>Description</label>:
+    <input type="text" required data-ng-model="newProduct.description"></br>
+    <label>Shine</label>:
+    <input type="text" required data-ng-model="newProduct.shine"></br>
+    <label>Color</label>:
+    <input type="text" data-ng-model="newProduct.color"></br>
+    <label>Faces</label>:
+    <input type="text" data-ng-model="newProduct.faces"></br>
+    <label>Rarity</label>:
+    <input type="text" data-ng-model="newProduct.rarity"></br>
+    <label>Category</label>:
+    <input type="text" required data-ng-model="newProduct.category_id"></br>
+    <button data-ng-click="create(newProduct); product.createForm= false;">Save New Product</button>
+    <button data-ng-click="product.createForm =false">Cancel</button>
+  </form>
+
+  <!--  Store Header  -->
+  <header>
+    <h1 class="text-center">Flatlander Crafted Gems</h1>
+    <h2 class="text-center">an Angular store </h2>
+  </header>
+
+  <!--  Products Container  -->
+  <div class="list-group">
+    <!--  Product Container  -->
+    <div class="list-group-item" ng-repeat="product in store.products">
+      <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
+
+      <!-- Image Gallery  -->
+      <div product-gallery></div product-gallery>
+
+      <button data-ng-click="product.editing = true">Edit Product</button>
+      <div data-ng-show="product.editing">
+        <label>Name</label>:
+        <input type="text" data-ng-model="product.name"> </br>
+        <label>Description</label>:
+        <input type="text" data-ng-model="product.description"> </br>
+        <button data-ng-click="update(product); product.editing = false;">Save</button>
+        <button data-ng-click="product.editing = false">Cancel</button>
+      </div>
+
+      <button data-ng-click="product.deleteConfirm = true">Delete</button>
+
+      <div data-ng-show="product.deleteConfirm">
+        <label>Are you sure to delete this product?</label>
+        <button data-ng-click="destroy(product); product.deleteConfirm = false;">Confirm</button>
+        <button data-ng-click="product.deleteConfirm = false">Cancel</button>
+      </div>
+
+      <!-- Product Tabs  -->
+      <product-tabs></product-tabs>
+    </div>
+
+  </div>
+</div>
